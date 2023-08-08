@@ -1,4 +1,6 @@
---Use Data Set Based on Countries in the World by Population
+# This project reveals insights based countries in the world by population.
+
+# This project utilized public data from the following dataset:
 
 CREATE TABLE countries(
    name                    TEXT PRIMARY KEY,
@@ -214,30 +216,39 @@ INSERT INTO countries(name,population,percent_one_year_change,population_change,
 INSERT INTO countries(name,population,percent_one_year_change,population_change,density_per_sq_km,area_sq_km,net_migrants,fertility_rate,median_age,percent_of_world_pop) VALUES ('Seychelles',98347,0.62,608,214,460,-200,2.50,34.00,0);
 INSERT INTO countries(name,population,percent_one_year_change,population_change,density_per_sq_km,area_sq_km,net_migrants,fertility_rate,median_age,percent_of_world_pop) VALUES ('Antigua and Barbuda',97929,0.84,811,223,440,0,2.00,34.00,0);
 
--- Display Countries Database
+
+# The following SQL was written to answer specific questions about the public data:
+
+
+#1 Display all the countries in the database.
+
 SELECT * FROM countries;
 
--- Display Countries with Populations Greater Than 10,000,000 Ordered by Country Name
+#2 Display the countries with populations greater than 10,000,000 and order by country name.
+
 SELECT name, SUM(population) AS "total_pop" FROM countries
 GROUP BY name 
 HAVING "total_pop" > 10000000;
 
--- Which Countries Have a Yearly Population Percentage Change Greater than 3%?
+#3 Which countries have a yearly population percentage change greater than 3%?
+
 SELECT name, AVG(percent_one_year_change) AS "yearly_change" FROM countries
 GROUP BY name
 HAVING "yearly_change" > 3;
 
--- Which Countries Have a Net Change in Population less than 5,000,000?
+#4 Which countries have a net change in population less than 5,000,000?
+
 SELECT name, MIN(population_change) AS "net_change" FROM countries
 GROUP BY name
 HAVING "net_change" < 5000000;
 
--- Which Countries Have the Median Age Greater Than 32?
+#5 Which countries have the median age greater than 32?
 SELECT name, MAX(median_age) FROM countries
 GROUP BY median_age
 HAVING median_age > 32;
 
--- How Many Countries belong to the Categories of Highest Population?
+#6 How Many countries belong to the categories of highest population?
+
 SELECT COUNT(*),
 CASE
     WHEN population > 1000000000 THEN "1"
@@ -246,7 +257,8 @@ CASE
     END AS "highest_pop" FROM countries
     GROUP BY "highest_pop";
 
--- Which Countires Have Populations Greater Than 200,000,000 OR Net Migrants Less Than 0; AND Having the Median Age Greater Than 25?
+#7 Which countires have populations greater than 200,000,000 OR net migrants less than 0; AND having the median age greater than 25?
+
 SELECT name FROM countries;
 SELECT name FROM countries WHERE population > 200000000 OR net_migrants < 0;
 SELECT name FROM countries WHERE net_migrants < 0 AND population > 200000000 AND median_age > 25;
