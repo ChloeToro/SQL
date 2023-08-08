@@ -1,4 +1,6 @@
-First I Created Two Tables for Famous People and Their Profession.
+# This project reveals insight about famous people and their profession.
+
+# This project utilized data from the following two datasets:
 
 CREATE TABLE Famous_People (id INTEGER PRIMARY KEY,
 first_name TEXT,
@@ -36,7 +38,9 @@ INSERT INTO Profession VALUES (2, "Musician");
 INSERT INTO Profession VALUES (3, "Dancer");
 INSERT INTO Profession VALUES (4, "Model");
 
-Then, I ordered my results to only show the first and last name of the famous people and their occupation.
+# The following SQL was written to answer the following:
+
+# List all the famous people and their profession.
 
 SELECT first_name, last_name, title AS "occupation" FROM Famous_People
     Join Profession
